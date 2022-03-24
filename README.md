@@ -1,25 +1,20 @@
-<<<<<<< HEAD
-# ELK_Project_2022
-## Automated ELK Stack Deployment
-=======
 # ElkChili_2022
 Elk Stack Project
->>>>>>> b7840b7daede31f94d1f5ba65c023605fa1b6494
 
 The files in this repository were used to configure the network depicted below.
 
-![henning_redteam_ELK_diagram - WK13](https://user-images.githubusercontent.com/92546881/159389487-5eef9a1b-0587-43e1-a05f-25cdc7a651fc.png)
+![image](https://user-images.githubusercontent.com/92546881/159834666-f2e1878a-238a-43dd-8870-f1d18460ce0f.png)
 
 
 These files have been tested and used to generate a live ELK deployment on Azure. They can be used to either recreate the entire deployment pictured above. Alternatively, select portions of the PLAYBOOK file may be used to install only certain pieces of it, such as Filebeat.
 
-[filebeat-config.txt](https://github.com/Aymeeh/ELK_Project_2022/files/8320224/filebeat-config.txt)
+[fileabeat-config.yml](https://github.com/Aymeeh/ElkChili_22/blob/main/Ansible/filebeat-configuration.yml)
 
-[metricbeat-config.txt](https://github.com/Aymeeh/ELK_Project_2022/files/8320227/metricbeat-config.txt)
+[filebeat-playbook.yml](https://github.com/Aymeeh/ElkChili_22/blob/main/Ansible/filebeat-playbook%20(1).yml) 
 
-[filebeat-playbook.txt](https://github.com/Aymeeh/ELK_Project_2022/files/8320232/filebeat-playbook.txt)
+[metricbeat-config.yml](https://github.com/Aymeeh/ElkChili_22/blob/main/Ansible/metricbeat-configuration.yml)
 
-[metricbeat-playbook.txt](https://github.com/Aymeeh/ELK_Project_2022/files/8320229/metricbeat-playbook.txt)
+[metricbeat-playbook.yml](https://github.com/Aymeeh/ElkChili_22/blob/main/Ansible/metricbeat-playbook%20(1).yml)
 
 This document contains the following details:
 - Description of the Topologu
@@ -77,8 +72,14 @@ The playbook implements the following tasks:
 - Configure sysctl modules to: use more memory, download and launch a Docker Elk container, and start docker on boot
 
 The following screenshot displays the result of running `docker ps` after successfully configuring the ELK instance.
+````sysadmin@ElkServer:~$ sudo docker ps
 
-![henning_docker_ps_output](https://user-images.githubusercontent.com/92546881/159391262-22d365f3-0247-4f46-82b1-36db5c22a569.png)
+    CONTAINER ID          IMAGE                COMMAND                       CREATED          STATUS       
+    339979bbe0e9          sebp/elk:761         "/usr/local/bin/star..."      6 days ago       Up 2 hours   
+    
+    PORTS                                                                                         NAMES
+    0.0.0.0:80->80/tcp, 0.0.0.0:5044->5044/tc, 0.0.0.0:5601->5601/tcp, 0.0.0.0:9200->9200/tcp     elk
+````
 
 ### Target Machines & Beats
 
@@ -108,28 +109,35 @@ SSH into the control node and follow the steps below:
 
 - Update the IP address on this line with the public IP address of your ELK machine:
 
-![image](https://user-images.githubusercontent.com/92546881/159391944-b86cb1d3-239f-40cf-ae82-036ae5038b8a.png)
+
+````output.elasticsearch:
+    hosts: ["10.1.0.4:9200"]
+    username: "elastic"
+    password: "changeme"
+````
 
 - Update this IP address with the same:
  
-![image](https://user-images.githubusercontent.com/92546881/159391895-3a519b5b-ceb1-4a89-b44d-f13998283951.png)
+````setup.kiabaa:
+    host: ["10.1.0.4:5601"]
+```` 
+-/etc/ansible/hosts
 
-## /etc/ansible/hosts
+You will then need to update the  `/etc/ansible/hosts` file with the added `elk` server:
 
- [webservers]
- 10.1.0.5 ansible_python_interpreter=/usr/bin/python3
- 10.1.0.6 ansible_python_interpreter=/usr/bin/python3
+ ````[webservers]
+     10.1.0.5 ansible_python_interpreter=/usr/bin/python3
+     10.1.0.6 ansible_python_interpreter=/usr/bin/python3
 
- [elk]
- 10.2.0.4 ansible_python_interpreter=/usr/bin/python3
+     [elk]
+     10.2.0.4 ansible_python_interpreter=/usr/bin/python3
+````
+ 
+- After you have completed the above tasks and configured the Ansible container appropriately, the following commands will need to be run in order to ensure the playbook(s) were configured correctly:
 
-- After you have completed the above tasks and configured the Ansible container appropriately, the following commands will need to be run in order   to ensure the playbook(s) were configured correctly:
+ `ansible-playbook filebeat-playbook.yml`
+ 
+ `ansible-playbook metricbeat-playbook.yml`
 
- ansible-playbook filebeat-playbook.yml
- ansible-playbook metricbeat-playbook.yml
+- If the deplayment ran correctly with no fatal errors or otherwise ntoes issues, transition to the web address of: http://<current ELK public IP address>:5601/app/kibana/home. Once executed, this address should open to the Kibana landing page related to your ELK VM where you can view and filter any logs and/or data compiled.
 
-<<<<<<< HEAD
-- If the deplayment ran correctly, transition to the web address of: http://<curreny ELK public IP address>:5601/app/kibana/home. Once executed,     this address should open to the Kibana landing page related to your ELK VM.
-=======
-- If the deplayment ran correctly, transition to the web address of: http://<curreny ELK public IP address>:5601/app/kibana/home. Once executed,     this address should open to the Kibana landing page related to your ELK VM.
->>>>>>> b7840b7daede31f94d1f5ba65c023605fa1b6494
