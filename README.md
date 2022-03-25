@@ -135,9 +135,11 @@ You will then need to update the  `/etc/ansible/hosts` file with the added `elk`
  
 - After you have completed the above tasks and configured the Ansible container appropriately, the following commands will need to be run in order to ensure the playbook(s) were configured correctly:
 
- `ansible-playbook filebeat-playbook.yml`
+ ````
+     ansible-playbook filebeat-playbook.yml
  
- `ansible-playbook metricbeat-playbook.yml`
+     ansible-playbook metricbeat-playbook.yml
+ ````
 
-- If the deplayment ran correctly with no fatal errors or otherwise ntoes issues, transition to the web address of: http://<current ELK public IP address>:5601/app/kibana/home. Once executed, this address should open to the Kibana landing page related to your ELK VM where you can view and filter any logs and/or data compiled.
+- If the deplayment ran correctly with no fatal errors or otherwise ntoes issues, transition to the web address of: `http://<current ELK public IP address>:5601/app/kibana/home`. Once executed, this address should open to the Kibana landing page related to your ELK VM where you can view and filter any logs and/or data compiled.
 
