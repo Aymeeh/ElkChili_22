@@ -1,7 +1,7 @@
-# ElkChili_2022
+ElkChili_2022
 Elk Stack Project
 
-##Cloud Network Diagram
+Cloud Network Diagram
 The files in this repository were compiled through a series of Ansible and Linux scripts during the course of my Cybersecurity Bootcamp. 
 A majority of the scripts facilitated the configuration and deployment of the network shown in the diagram below. 
 This cloud network consists of one JumpBox, two virtual machines with DVWA containers, and a server utilizing an ELK stack container.
